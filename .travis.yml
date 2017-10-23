@@ -8,7 +8,7 @@ install: mvn clean install package
 
 deploy:
   region: eu-gb
-  api: api.eu-gb.bluemix.net
+  api: https://api.eu-gb.bluemix.net
   provider: bluemixcloudfoundry
   skip_cleanup: true
   manifest: manifest.yml
