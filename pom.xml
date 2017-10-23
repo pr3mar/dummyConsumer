@@ -5,7 +5,7 @@
 
     <groupId>com.rsostream.dummyConsumer</groupId>
     <artifactId>dummy-consumer</artifactId>
-    <version>1.0.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>dummyConsumer</name>
