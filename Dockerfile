@@ -6,6 +6,6 @@ WORKDIR /app
 
 ADD ./target/dummy-consumer-1.0-SNAPSHOT.jar /app
 
-EXPOSE 8081
+EXPOSE 8080
 
 CMD ["java", "-jar", "dummy-consumer-1.0-SNAPSHOT.jar"]
