@@ -7,6 +7,7 @@ jdk:
 install: mvn clean install package
 
 deploy:
+  aci: api.eu-gb.bluemix.net
   provider: bluemixcloudfoundry
   skip_cleanup: true
   manifest: manifest.yml
