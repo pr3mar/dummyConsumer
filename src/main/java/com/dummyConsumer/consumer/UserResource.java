@@ -6,42 +6,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-class CustomUser {
-    private int id;
-    private String firstName;
-    private String lastName;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-}
-
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("users")
 public class UserResource {
     @GET
-    public Response getAllUser() {
+    public Response getAllUsers() {
         List<User> users = DataBase.getUsers();
         return Response.ok(users).build();
     }
@@ -62,14 +32,37 @@ public class UserResource {
         return Response.ok(user).build();
     }
 
+    @POST
+    @Path("create")
+    public Response createDummyUsers() {
+        if (DataBase.isEmpty()) {
+            System.out.println("Creating dummy users.");
+
+            User m = new User();
+            m.setId(0);
+            m.setFirstName("Marko");
+            m.setLastName("P");
+
+            User m1 = new User();
+            m1.setId(1);
+            m1.setFirstName("Luka");
+            m1.setLastName("P");
+
+            DataBase.addUser(m);
+            DataBase.addUser(m1);
+        }
+
+        return Response.ok(DataBase.getUsers()).build();
+    }
+
     @GET
-    @Path("test")
-    public Response getUserByIdTest(@QueryParam("id") int id) {
-        System.out.println("Hooraaay" + id);
+    @Path("movies")
+    public Response getUserByIdTest() {
+        System.out.println("Getting user movies");
         Client client = ClientBuilder.newClient();
         Response resp = client
-                .target("http://localhost:8080/v1/users/")
-                .path(String.valueOf(id)) // sets a parameter in the url -> .../users/{id}
+                .target("http://localhost:8081/v1/producer/")
+//                .path(String.valueOf(id)) // sets a parameter in the url -> .../users/{id}
              // .queryParam("id", "1") // sets a query parameter as in ?id=<someID>
                 .request(MediaType.APPLICATION_JSON)
                 .get();

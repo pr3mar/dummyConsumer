@@ -27,4 +27,6 @@ public class DataBase {
             }
         }
     }
+
+    public static boolean isEmpty() { return users.isEmpty(); }
 }
