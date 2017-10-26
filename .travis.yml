@@ -9,4 +9,4 @@ script:
   - docker build -t moj-repozitorij/rso-customers .
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push pr3mar/dummyConsumer
+  - docker push pr3mar/dummyconsumer
