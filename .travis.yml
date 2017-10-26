@@ -1,20 +1,15 @@
+sudo: required
+services:
+  -docker
 language: java
-
-
+dist: trusty
 jdk:
-- openjdk8
-
-install: mvn clean install package
-
-deploy:
-  region: eu-gb
-  api: https://api.eu-gb.bluemix.net
-  provider: bluemixcloudfoundry
-  skip_cleanup: true
-  manifest: manifest.yml
-  username: $BLUEMIX_USER
-  password: $BLUEMIX_PASSWORD
-  organization: $BLUEMIX_ORGANIZATION
-  space: $BLUEMIX_SPACE
-  on:
-    branch: master
+  -openjdk8
+cache:
+directories: -$HOME/.m2
+script:
+  -mvn clean package -U
+  -docker build -t moj-repozitorij/rso-customers .
+after_success:
+  -docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  -docker push pr3mar/dummyConsumer
