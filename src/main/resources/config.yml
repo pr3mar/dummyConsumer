@@ -1,9 +1,15 @@
-kumuluzee:
-  name: dummy-consumer
-  env:
-    name: dev
-  version: 1.0.0
-  server:
-    base-url: http://localhost:8080
-    http:
-      port: 8080
+sudo: required
+services:
+  -docker
+language: java
+dist: trusty
+jdk:
+  -openjdk8
+cache:
+directories: -$HOME/.m2
+script:
+  -mvn clean package -U
+  -docker build -t moj-repozitorij/rso-customers .
+after_success:
+  -docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  -docker push pr3mar/dummyConsumer
