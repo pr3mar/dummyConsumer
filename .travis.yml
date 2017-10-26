@@ -4,7 +4,7 @@ services:
 language: java
 dist: trusty
 jdk:
-  -openjdk8
+  -oraclejdk8
 cache:
 directories: -$HOME/.m2
 script:
