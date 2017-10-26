@@ -6,7 +6,7 @@ dist: trusty
 directories: -$HOME/.m2
 script:
   - mvn clean package -U
-  - docker build -t pr3mar/dummyconsumer .
+  - docker build -t rsostream/dummyconsumer .
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push pr3mar/dummyconsumer
+  - docker push rsostream/dummyconsumer
