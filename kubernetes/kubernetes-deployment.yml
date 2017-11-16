@@ -12,7 +12,7 @@ spec:
       containers:
       - image: rsostream/dummyconsumer:latest
         name: rso-dummy-consumer
-        env:
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
           name: server

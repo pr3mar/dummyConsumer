@@ -32,8 +32,8 @@ public class DataBase {
 
     public static void addUser(User user) {
 
-        if(user.getMeta().equals("")) {
-            user.setMeta("No meta data");
+        if(user != null || user.getMeta().equals("")) {
+            user.setMeta("[u] No meta data.");
         }
 
         if(isUnique(user.getId())) {

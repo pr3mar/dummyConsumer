@@ -43,13 +43,13 @@ public class UserResource {
             m.setId(0);
             m.setFirstName("Marko");
             m.setLastName("P");
-            m.setMeta("New feature 1");
+            m.setMeta("[b]New feature 1");
 
             User m1 = new User();
             m1.setId(1);
             m1.setFirstName("Luka");
             m1.setLastName("P");
-            m1.setMeta("New feature 2");
+            m1.setMeta("[c]New feature 2");
 
             DataBase.addUser(m);
             DataBase.addUser(m1);
