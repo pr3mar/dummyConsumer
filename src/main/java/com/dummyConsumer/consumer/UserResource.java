@@ -1,5 +1,10 @@
 package com.dummyConsumer.consumer;
 
+import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
@@ -9,8 +14,38 @@ import java.util.List;
 
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Path("users")
+@Path("/users")
+@ApplicationScoped
 public class UserResource {
+
+    @Inject
+    private ConfigProperties properties;
+
+    @GET
+    @Path("/config")
+    public Response test() {
+        String response =
+                "{" +
+                        "\"stringProperty\": \"%s\"," +
+                        "\"booleanProperty\": %b," +
+                        "\"integerProperty\": %d" +
+                        "}";
+
+        response = String.format(
+                response,
+                properties.getStringProperty(),
+                properties.getBooleanProperty(),
+                properties.getIntegerProperty());
+
+        return Response.ok(response).build();
+    }
+
+    @GET
+    @Path("/get")
+    public Response get() {
+        return Response.ok(ConfigurationUtil.getInstance().get("rest-config.string-property").orElse("nope")).build();
+    }
+
     @GET
     public Response getAllUsers() {
         List<User> users = DataBase.getUsers();

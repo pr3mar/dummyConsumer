@@ -1,11 +1,11 @@
-apiVersion: apps/v1beta1
-kind: Deployment
+apiVersion: v1
+kind: ReplicationController
 metadata:
   name: rso-dummy-consumer-deployment
 spec:
   replicas: 1
   selector:
-      app: rso-dummy-consumer
+    app: rso-dummy-consumer
   template:
     metadata:
       labels:

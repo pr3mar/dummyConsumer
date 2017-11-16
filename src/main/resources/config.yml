@@ -1,9 +1,14 @@
 kumuluzee:
   name: dummy-consumer
+  version: 1.0.0
   env:
     name: dev
-  version: 1.0.0
-  server:
-    base-url: http://localhost:8080
-    http:
-      port: 8080
+  config:
+    start-retry-delay-ms: 500
+    max-retry-delay-ms: 900000
+    etcd:
+      hosts: http://169.51.13.160:31711
+rest-config:
+  string-property: Monday
+  boolean-property: true
+  integer-property: 23
