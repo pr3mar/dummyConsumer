@@ -17,7 +17,27 @@ public class DataBase {
         return null;
     }
 
-    public static void addUser(User user) { users.add(user); }
+    private static boolean isUnique(int userId) {
+        for(User user : users) {
+            if(userId == user.getId()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static int getUniqueId() {
+        return users.size();
+    }
+
+    public static void addUser(User user) {
+        if(isUnique(user.getId())) {
+            users.add(user);
+        } else {
+            user.setId(getUniqueId());
+            users.add(user);
+        }
+    }
 
     public static void deleteUser(int userId) {
         for(User user : users) {

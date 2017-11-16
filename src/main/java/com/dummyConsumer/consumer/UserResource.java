@@ -4,6 +4,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.crypto.Data;
 import java.util.List;
 
 @Consumes(MediaType.APPLICATION_JSON)
@@ -61,7 +62,7 @@ public class UserResource {
         System.out.println("Getting user movies");
         Client client = ClientBuilder.newClient();
         Response resp = client
-                .target("http://localhost:8081/v1/producer/")
+                .target("http://localhost:8081/v1/producer/") // TODO: add service discovery
 //                .path(String.valueOf(id)) // sets a parameter in the url -> .../users/{id}
              // .queryParam("id", "1") // sets a query parameter as in ?id=<someID>
                 .request(MediaType.APPLICATION_JSON)

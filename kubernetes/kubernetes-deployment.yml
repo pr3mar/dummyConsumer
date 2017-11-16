@@ -1,0 +1,19 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: rso-dummy-consumer-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rso-dummy-consumer
+    spec:
+      containers:
+      - image: pr3mar/dummyconsumer
+        name: rso-dummy-consumer
+        env:
+        ports:
+        - containerPort: 8080
+          name: server
+          protocol: TCP
