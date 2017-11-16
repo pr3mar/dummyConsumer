@@ -4,6 +4,7 @@ public class User {
     private int id;
     private String firstName;
     private String lastName;
+    private String meta;
 
     public int getId() {
         return id;
@@ -27,5 +28,13 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getMeta() {
+        return meta;
+    }
+
+    public void setMeta(String meta) {
+        this.meta = meta;
     }
 }

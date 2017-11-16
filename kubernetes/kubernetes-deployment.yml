@@ -10,7 +10,7 @@ spec:
         app: rso-dummy-consumer
     spec:
       containers:
-      - image: pr3mar/dummyconsumer
+      - image: rsostream/dummyconsumer:latest
         name: rso-dummy-consumer
         env:
         ports:
