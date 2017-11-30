@@ -23,5 +23,5 @@ spec:
         - containerPort: 8080
           name: server
           protocol: TCP
-
+        imagePullPolicy: Always
 # kubectl set image deployment/rso-iot-dummy-consumer rso-dummy-consumer=rsostream/dummyconsumer:0.01 #setting a new image to a deployment

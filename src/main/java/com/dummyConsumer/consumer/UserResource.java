@@ -1,5 +1,7 @@
 package com.dummyConsumer.consumer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
 import org.json.JSONObject;
 
@@ -9,6 +11,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.crypto.Data;
+import java.io.IOException;
 import java.util.List;
 
 @Consumes(MediaType.APPLICATION_JSON)
@@ -135,7 +139,7 @@ public class UserResource {
 
     @GET()
     @Path("proxy")
-    public Response getProxiedCustomers() {
+    public Response getProxiedCustomers() throws IOException {
         System.out.println("getting via discovery service");
 
         WebTarget service = tProducer.path("v1/producer");
@@ -147,10 +151,8 @@ public class UserResource {
             return Response.status(408).build();
         }
 
-        ProxiedResponse proxiedResponse = new ProxiedResponse();
-        proxiedResponse.setResponse(response.readEntity(String.class));
-        proxiedResponse.setProxiedFrom(tProducer.getUri().toString());
-
-        return Response.ok(proxiedResponse).build();
+//        Data data = new Gson().fromJson(response.readEntity(String.class), Data.class);
+        Movie data = new ObjectMapper().readValue(response.readEntity(String.class), Movie.class);
+        return Response.ok(data).build();
     }
 }
