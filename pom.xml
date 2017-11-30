@@ -17,6 +17,7 @@
         <kumuluz.version>2.4.1</kumuluz.version>
         <maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
         <kumuluzee-config.version>1.1.0-SNAPSHOT</kumuluzee-config.version>
+        <kumuluzee-discovery.version>1.1.0-SNAPSHOT</kumuluzee-discovery.version>
     </properties>
 
     <repositories>
@@ -71,6 +72,20 @@
             <artifactId>kumuluzee-config-etcd</artifactId>
             <version>${kumuluzee-config.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.kumuluz.ee.discovery</groupId>
+            <artifactId>kumuluzee-discovery-etcd</artifactId>
+            <version>${kumuluzee-discovery.version}</version>
+        </dependency>
+
+        <dependency>
+            <!-- JSON builder, used for GET /info end-point -->
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20171018</version>
+        </dependency>
+
     </dependencies>
 
     <build>

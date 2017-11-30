@@ -1,6 +1,7 @@
 package com.dummyConsumer.consumer;
 
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
+import org.json.JSONObject;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
@@ -9,7 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.crypto.Data;
+import java.lang.reflect.Array;
 import java.util.List;
 
 @Consumes(MediaType.APPLICATION_JSON)
@@ -105,5 +106,27 @@ public class UserResource {
                 .request(MediaType.APPLICATION_JSON)
                 .get();
         return Response.ok(resp.getEntity()).build();
+    }
+
+    @GET
+    @Path("info")
+    public Response getProjectInfo() {
+        JSONObject jsonString = new JSONObject()
+                .put("clani", new String[]{"mp2638"})
+                .put("opis projekta", "Ta projekt je IoT data aggregator.\n" +
+                        "Na koncu bo imel naslednje mikrostoritve:\n" +
+                        "- skrbi o komunikaciji s posameznimi napravami,\n" +
+                        "- za analizo vhodnih podatkov\n" +
+                        "- ki strezi vse podatke v raw obliki\n" +
+                        "- ki generira porocila o podatkih v dolocenem casovnem obdobju\n" +
+                        "- improviziran front-end\n" +
+                        "- uporabniki, ki imajo svoje naprave")
+                .put("mikrostoritve", new String[]{"http://169.51.13.160:32024/v1/users/"})
+                .put("github", new String[]{"https://github.com/rsoStream/dummyConsumer"})
+                .put("travis", new String[]{"https://travis-ci.org/rsoStream/dummyConsumer"})
+                .put("dockerhub", new String[]{"https://hub.docker.com/r/rsostream/dummyconsumer"});
+
+
+        return Response.ok(jsonString.toString()).build();
     }
 }
