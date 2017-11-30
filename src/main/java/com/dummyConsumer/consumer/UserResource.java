@@ -91,20 +91,6 @@ public class UserResource {
     }
 
     @GET
-    @Path("movies")
-    public Response getUserByIdTest() {
-        System.out.println("Getting user movies");
-        Client client = ClientBuilder.newClient();
-        Response resp = client
-                .target("http://localhost:8081/v1/producer/") // TODO: add service discovery
-//                .path(String.valueOf(id)) // sets a parameter in the url -> .../users/{id}
-             // .queryParam("id", "1") // sets a query parameter as in ?id=<someID>
-                .request(MediaType.APPLICATION_JSON)
-                .get();
-        return Response.ok(resp.getEntity()).build();
-    }
-
-    @GET
     @Path("info")
     public Response getProjectInfo() {
         JSONObject jsonString = new JSONObject()
@@ -138,21 +124,36 @@ public class UserResource {
     }
 
     @GET()
-    @Path("proxy")
+    @Path("movies")
     public Response getProxiedCustomers() throws IOException {
         System.out.println("getting via discovery service");
 
         WebTarget service = tProducer.path("v1/producer");
 
-        Response response;
-        try {
-            response = service.request().get();
-        } catch (ProcessingException e) {
-            return Response.status(408).build();
+        Response response = HandleResponces.getResponse(service);
+        if (response != null) {
+            Movie[] data = new ObjectMapper().readValue(response.readEntity(String.class), Movie[].class);
+            return Response.ok(data).build();
+        } else {
+            return Response.noContent().build();
         }
 
-//        Data data = new Gson().fromJson(response.readEntity(String.class), Data.class);
-        Movie[] data = new ObjectMapper().readValue(response.readEntity(String.class), Movie[].class);
-        return Response.ok(data).build();
+    }
+
+    @GET()
+    @Path("movie/{id}")
+    public Response getProxiedCustomers(@PathParam("id") int id) throws IOException {
+        System.out.println("getting via discovery service");
+
+        WebTarget service = tProducer.path("v1/producer/" + id);
+
+        Response response = HandleResponces.getResponse(service);
+
+        if (response != null) {
+            Movie data = new ObjectMapper().readValue(response.readEntity(String.class), Movie.class);
+            return Response.ok(data).build();
+        } else {
+            return Response.noContent().build();
+        }
     }
 }
