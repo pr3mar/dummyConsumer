@@ -1,6 +1,7 @@
 package com.dummyConsumer.consumer;
 
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
+import com.kumuluz.ee.discovery.annotations.DiscoverService;
 import org.json.JSONObject;
 
 import javax.enterprise.context.ApplicationScoped;
