@@ -152,7 +152,7 @@ public class UserResource {
         }
 
 //        Data data = new Gson().fromJson(response.readEntity(String.class), Data.class);
-        Movie data = new ObjectMapper().readValue(response.readEntity(String.class), Movie.class);
+        Movie[] data = new ObjectMapper().readValue(response.readEntity(String.class), Movie[].class);
         return Response.ok(data).build();
     }
 }
