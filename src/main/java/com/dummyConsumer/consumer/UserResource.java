@@ -134,7 +134,7 @@ public class UserResource {
     }
 
     @GET()
-    @Path("movies")
+    @Path("proxy")
     public Response getProxiedCustomers() {
         System.out.println("getting via discovery service");
 
