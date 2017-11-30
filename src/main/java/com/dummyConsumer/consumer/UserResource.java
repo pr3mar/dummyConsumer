@@ -1,17 +1,14 @@
 package com.dummyConsumer.consumer;
 
-import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
 import org.json.JSONObject;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.lang.reflect.Array;
 import java.util.List;
 
 @Consumes(MediaType.APPLICATION_JSON)
@@ -137,8 +134,10 @@ public class UserResource {
     }
 
     @GET()
-    @Path("producer/")
+    @Path("movies")
     public Response getProxiedCustomers() {
+        System.out.println("getting via discovery service");
+
         WebTarget service = tProducer.path("v1/producer");
 
         Response response;

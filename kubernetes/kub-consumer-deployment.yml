@@ -10,7 +10,7 @@ spec:
         app: rso-dummy-consumer
     spec:
       containers:
-      - image: rsostream/dummyconsumer:0.01
+      - image: rsostream/dummyconsumer:0.02
         name: rso-dummy-consumer
         env:
           - name: KUMULUZEE_DISCOVERY_CLUSTER
