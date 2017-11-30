@@ -6,18 +6,16 @@ import com.kumuluz.ee.configuration.cdi.ConfigValue;
 
 import javax.enterprise.context.ApplicationScoped;
 
-/**
- * @author Benjamin Kastelic
- * @since 2.3.0
- */
 @ApplicationScoped
 @ConfigBundle("rest-config")
 public class ConfigProperties {
 
     @ConfigValue(watch = true)
     private String stringProperty;
+
     @ConfigValue(watch = true)
     private Boolean booleanProperty;
+
     @ConfigValue(watch = true)
     private Integer integerProperty;
 

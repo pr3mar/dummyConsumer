@@ -42,12 +42,6 @@ public class UserResource {
     }
 
     @GET
-    @Path("/get")
-    public Response get() {
-        return Response.ok(ConfigurationUtil.getInstance().get("rest-config.string-property").orElse("nope")).build();
-    }
-
-    @GET
     public Response getAllUsers() {
         List<User> users = DataBase.getUsers();
         return Response.ok(users).build();

@@ -1,0 +1,27 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: rso-iot-dummy-consumer
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rso-dummy-consumer
+    spec:
+      containers:
+      - image: rsostream/dummyconsumer:0.01
+        name: rso-dummy-consumer
+        env:
+          - name: KUMULUZEE_DISCOVERY_CLUSTER
+            value: rso-iot
+          - name: KUMULUZEE_DISCOVERY_ETCD_HOSTS
+            value: http://etcd:2379
+          - name: KUMULUZEE_CONFIG_ETCD_HOSTS
+            value: http://etcd:2379
+        ports:
+        - containerPort: 8080
+          name: server
+          protocol: TCP
+
+# kubectl set image deployment/rso-iot-dummy-consumer rso-dummy-consumer=rsostream/dummyconsumer:0.01 #setting a new image to a deployment

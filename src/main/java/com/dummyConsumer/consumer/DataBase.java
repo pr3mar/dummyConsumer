@@ -32,7 +32,7 @@ public class DataBase {
 
     public static void addUser(User user) {
 
-        if(user != null || user.getMeta().equals("")) {
+        if(user.getMeta().equals("")) {
             user.setMeta("[u] No meta data.");
         }
 
