@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Path("/users")
+@Path("/producer")
 @RequestScoped
 public class ProducerResource {
 
