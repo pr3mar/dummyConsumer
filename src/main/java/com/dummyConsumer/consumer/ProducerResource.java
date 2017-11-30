@@ -2,7 +2,7 @@ package com.dummyConsumer.consumer;
 
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.client.WebTarget;
@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/producer")
-@RequestScoped
+@ApplicationScoped
 public class ProducerResource {
 
     @Inject

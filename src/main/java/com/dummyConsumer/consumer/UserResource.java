@@ -124,4 +124,34 @@ public class UserResource {
 
         return Response.ok(jsonString.toString()).build();
     }
+
+    @Inject
+    @DiscoverService(value = "dummy-producer", version = "1.0.0", environment = "dev")
+    private WebTarget tProducer;
+
+    @GET
+    @Path("url")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response getUrl() {
+        return Response.ok(tProducer.getUri().toString()).build();
+    }
+
+    @GET()
+    @Path("producer/")
+    public Response getProxiedCustomers() {
+        WebTarget service = tProducer.path("v1/producer");
+
+        Response response;
+        try {
+            response = service.request().get();
+        } catch (ProcessingException e) {
+            return Response.status(408).build();
+        }
+
+        ProxiedResponse proxiedResponse = new ProxiedResponse();
+        proxiedResponse.setResponse(response.readEntity(String.class));
+        proxiedResponse.setProxiedFrom(tProducer.getUri().toString());
+
+        return Response.ok(proxiedResponse).build();
+    }
 }
