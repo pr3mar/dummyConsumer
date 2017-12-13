@@ -1,8 +1,8 @@
 package com.dummyConsumer.consumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
+//import com.kumuluz.ee.logs.cdi.Log;
 import org.json.JSONObject;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -11,7 +11,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,6 +23,7 @@ public class UserResource {
     @Inject
     private ConfigProperties properties;
 
+    //@Log
     @GET
     @Path("/config")
     public Response test() {
@@ -43,18 +43,21 @@ public class UserResource {
         return Response.ok(response).build();
     }
 
+    //@Log
     @GET
     public Response getAllUsers() {
         List<User> users = DataBase.getUsers();
         return Response.ok(users).build();
     }
 
+    //@Log
     @POST
     public Response createNewUser(User user) {
         DataBase.addUser(user);
         return Response.ok(true).build();
     }
 
+    //@Log
     @GET
     @Path("{id}")
     public Response getUserById(
@@ -65,6 +68,7 @@ public class UserResource {
         return Response.ok(user).build();
     }
 
+    //@Log
     @POST
     @Path("create")
     public Response createDummyUsers() {
@@ -90,6 +94,7 @@ public class UserResource {
         return Response.ok(DataBase.getUsers()).build();
     }
 
+    //@Log
     @GET
     @Path("info")
     public Response getProjectInfo() {
@@ -102,11 +107,12 @@ public class UserResource {
                         "- ki strezi vse podatke v raw obliki\n" +
                         "- ki generira porocila o podatkih v dolocenem casovnem obdobju\n" +
                         "- improviziran front-end\n" +
-                        "- uporabniki, ki imajo svoje naprave")
-                .put("mikrostoritve", new String[]{"http://169.51.13.160:32024/v1/users/"})
-                .put("github", new String[]{"https://github.com/rsoStream/dummyConsumer"})
-                .put("travis", new String[]{"https://travis-ci.org/rsoStream/dummyConsumer"})
-                .put("dockerhub", new String[]{"https://hub.docker.com/r/rsostream/dummyconsumer"});
+                        "- uporabniki, ki imajo svoje naprave\n" +
+                        "OPOMBA: Pri tej oddaji so samo 2 servisa, ki imata dummy podatke, kako bi implementiral cim vec funkcionalnost.")
+                .put("mikrostoritve", new String[]{"http://169.51.13.160:31933/v1/users/", "http://169.51.13.160:30350/v1/producer/", })
+                .put("github", new String[]{"https://github.com/rsoStream/dummyConsumer", "https://github.com/rsoStream/Producer", })
+                .put("travis", new String[]{"https://travis-ci.org/rsoStream/dummyConsumer", "https://travis-ci.org/rsoStream/Producer", })
+                .put("dockerhub", new String[]{"https://hub.docker.com/r/rsostream/"});
 
 
         return Response.ok(jsonString.toString()).build();
@@ -116,6 +122,7 @@ public class UserResource {
     @DiscoverService(value = "dummy-producer", version = "1.0.0", environment = "dev")
     private WebTarget tProducer;
 
+    //@Log
     @GET
     @Path("url")
     @Produces(MediaType.TEXT_PLAIN)
@@ -123,7 +130,8 @@ public class UserResource {
         return Response.ok(tProducer.getUri().toString()).build();
     }
 
-    @GET()
+    //@Log
+    @GET
     @Path("movies")
     public Response getProxiedCustomers() throws IOException {
         System.out.println("getting via discovery service");
@@ -140,7 +148,8 @@ public class UserResource {
 
     }
 
-    @GET()
+    //@Log
+    @GET
     @Path("movie/{id}")
     public Response getProxiedCustomers(@PathParam("id") int id) throws IOException {
         System.out.println("getting via discovery service");
