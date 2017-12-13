@@ -100,7 +100,7 @@ public class UserResource {
     public Response getProjectInfo() {
         JSONObject jsonString = new JSONObject()
                 .put("clani", new String[]{"mp2638"})
-                .put("opis projekta", "Ta projekt je IoT data aggregator.\n" +
+                .put("opis_projekta", "Ta projekt je IoT data aggregator.\n" +
                         "Na koncu bo imel naslednje mikrostoritve:\n" +
                         "- skrbi o komunikaciji s posameznimi napravami,\n" +
                         "- za analizo vhodnih podatkov\n" +
