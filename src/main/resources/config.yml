@@ -6,13 +6,17 @@ kumuluzee:
   config:
     start-retry-delay-ms: 500
     max-retry-delay-ms: 900000
+    etcd:
+      hosts: http://localhost:2379
   server:
-    base-url: http://169.51.13.160 # zunanji URL
+#    base-url: http://169.51.13.160 # zunanji URL
+    base-url: http://localhost # zunanji URL
     http:
-      port: 8080
+      port: 8085
   discovery:
     etcd:
-      hosts: http://etcd:2379
+#      hosts: http://etcd:2379
+      hosts: http://localhost:2379
     ttl: 20
     ping-interval: 15
   cors-filter:
@@ -25,7 +29,7 @@ kumuluzee:
                           <Console name="console" target="SYSTEM_OUT">
                               <PatternLayout pattern="%d %p %marker %m %X %ex %n"/>
                           </Console>
-                          <Socket name="logstash" host="40ea390d-ae06-41fa-9ba3-3d426395c000-ls.logit.io" port="17078"
+                          <Socket name="logstash" host="221e8a85-d5ce-40e4-a708-057e7c7d7e68-ls.logit.io" port="14880"
                                                                                          protocol="tcp">
                               <JSONLayout complete="false" compact="true" eventEol="true" charset="UTF-8" properties="true"/>
                           </Socket>
@@ -33,7 +37,7 @@ kumuluzee:
                       <Loggers>
                           <!-- Default logger -->
                           <Root level="all">
-                              <AppenderRef ref="console" level="info"/>
+                              <AppenderRef ref="console" level="debug"/>
                               <AppenderRef ref="logstash" level="trace"/>
                           </Root>
                       </Loggers>
@@ -43,4 +47,10 @@ rest-config:
   boolean-property: true
   integer-property: 23
 
+rabbit-mq:
+  host: localhost
+  username: guest
+  password: guest
+  routing-key: tcp-q
+  exchange-name: ''
 # ETCD kubernetes deployment -> github rso-customers @ jmezna

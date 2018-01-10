@@ -1,8 +1,11 @@
 package com.dummyConsumer.consumer;
 
+import com.kumuluz.ee.logs.cdi.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Log
 public class DataBase {
     private static List<User> users = new ArrayList<>();
 
