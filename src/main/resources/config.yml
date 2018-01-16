@@ -12,7 +12,7 @@ kumuluzee:
 #    base-url: http://169.51.13.160 # zunanji URL
     base-url: http://localhost # zunanji URL
     http:
-      port: 8085
+      port: 8086
   discovery:
     etcd:
 #      hosts: http://etcd:2379
